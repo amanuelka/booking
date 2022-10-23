@@ -1,6 +1,5 @@
 <section id="viewAddhotel">
     <h2>Edit existing hotel</h2>
-    {{#with hotel}}
     <form id="formAddhotel" method="post" action="/hotel/{{_id}}/edit">
         <label for="hotel">Hotel name:</label>
         <input type="text" id="hotel" name="name" value="{{name}}">
@@ -13,5 +12,4 @@
 
         <input type="submit" class="create" value="Add">
     </form>
-    {{/with}}
 </section>

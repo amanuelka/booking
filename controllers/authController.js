@@ -1,6 +1,6 @@
 const validator = require('validator');
 const { register, login } = require('../services/userService');
-const { parseError } = require('../util/parser');
+const { parseError } = require('../middlewares/parser');
 
 const authController = require('express').Router();
 
@@ -47,22 +47,17 @@ authController.post('/login', async (req, res) => {
     try {
         const token = await login(req.body.email, req.body.password);
         res.cookie('token', token);
-        res.redirect('/'); 
+        res.redirect('/');
     }
     catch (error) {
         const errors = parseError(error);
-        res.render('login', {
-            errors,
-            body: {
-                email: req.body.email
-            }
-        });
+        res.render('login', { errors, body: { email: req.body.email } });
     }
 });
 
 authController.get('/logout', (req, res) => {
     res.clearCookie('token');
     res.redirect('/');
-})
+});
 
 module.exports = authController;

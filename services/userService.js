@@ -8,8 +8,8 @@ async function register(email, username, password) {
     const esistingEmail = await User.findOne({ email }).collation({ locale: 'en', strength: 2 });
     if (esistingEmail) {
         throw new Error('Email is taken');
-    }    
-    
+    }
+
     const existingUsername = await User.findOne({ username }).collation({ locale: 'en', strength: 2 });
     if (existingUsername) {
         throw new Error('Username is taken');
@@ -54,8 +54,4 @@ function verifyToken(token) {
     return jwt.verify(token, JWT_SECRET);
 }
 
-module.exports = {
-    register,
-    login,
-    verifyToken
-}
+module.exports = { register, login, verifyToken };
